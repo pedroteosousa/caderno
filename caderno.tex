@@ -1,0 +1,174 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Caderno}
+\author{pedroteosousa }
+\date{}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+	tabsize=4,
+	showstringspaces=false,
+	commentstyle=\color{black},
+	keywordstyle=\color{blue},
+	stringstyle=\color{red}
+}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Geometry}
+\subsection{Point Struct}
+\begin{lstlisting}[language=C++]
+typedef long long type;
+
+double EPS = 1e-12;
+
+struct point {
+    type x, y;
+    point(type xp = 0.0, type yp = 0.0) {
+        x = xp;
+        y = yp;
+    }
+    point(const fpoint &p) {
+        x = p.x;
+        y = p.y;
+    }
+    point operator+ (const point &p) const {return point(x+p.x, y+p.y);}
+    point operator- (const point &p) const {return point(x-p.x, y-p.y);}
+    point operator* (type c) {return point(c*x, c*y);}
+    point operator/ (type c) {return point(x/c, y/c);}
+
+    bool operator<(const point &p) {return x < p.x || x == p.x && y < p.y;}
+};
+
+type dot(point p, point q) {return p.x*q.x+p.y*q.y;}
+type dist(point p, point q) {return sqrt(dot(p-q,p-q));}
+type cross(point p, point q) {return p.x*q.y-p.y*q.x;}
+
+point projectInLine(point c, point a, point b) {
+	return a + (b-a)*dot(c-a, b-a)/dot(b-a, b-a);
+}
+point projectInSegment(point c, point a, point b) {
+    point lineP = projectInLine(c, a, b);
+    type maxDist = max(dist(a, lineP), dist(b, lineP));
+    if (maxDist > dist(a, b)) {
+        if (dist(a, c) > dist(b, c)) return b;
+        else return a;
+    }
+    else return lineP;
+}\end{lstlisting}
+\subsection{Convex Hull}
+\begin{lstlisting}[language=C++]
+double side(point a, point b, point c) {
+    return cross(a, b) + cross(b, c) + cross(c, a);
+}
+
+vector<point> convex_hull(vector<point> p) {
+    int n = p.size(), k = 0;
+    if (n == 1) return p;
+    vector<point> hull(2*n);
+
+    sort(p.begin(), p.end());
+
+    for(int i=0; i<n; i++) {
+        while(k>=2 && (side(hull[k-2], hull[k-1], p[i]) <= 0)) k--;
+        hull[k++] = p[i];
+    }
+
+    for(int i=n-2,t=k+1; i>=0; i--) {
+        while(k>=t && (side(hull[k-2], hull[k-1], p[i]) <= 0)) k--;
+        hull[k++] = p[i];
+    }
+
+    hull.resize(k-1);
+    return hull;
+}\end{lstlisting}
+\section{Data Structures}
+\subsection{BIT}
+\begin{lstlisting}[language=C++]
+int b[N];
+
+int update(int p, int val, int n) {
+	for(;p < n; p += p & -p) b[p] += val;
+}
+
+int getsum(int p) {
+	int sum = 0;
+	for(; p != 0; p -= p & -p) {
+		sum += b[p];
+	}
+	return sum;
+}
+\end{lstlisting}
+\subsection{Recursive Segment Tree}
+\begin{lstlisting}[language=C++]
+const int N = 1e6 + 5;
+
+int t[N<<1];
+
+void build(int n) {
+	for(int i = n-1; i > 0; i--) t[i] = min(t[i<<1], t[i<<1|1]);
+}
+
+void modify(int pos, int val, int n) {
+	for(t[pos += n] = val; pos != 1; pos>>=1)
+		t[pos>>1] = min(t[pos], t[pos^1]);
+}
+
+int query(int l, int r, int n) { // [l, r)
+	int resp = 1000000007;
+	for(l += n, r += n; l < r; l >>= 1, r >>= 1) {
+		if (l&1) resp = min(resp, t[l++]);
+		if (r&1) resp = min(resp, t[--r]);
+	}
+	return resp;
+}
+\end{lstlisting}
+\subsection{Lazy Segment Tree}
+\begin{lstlisting}[language=C++]
+const int inf = 1791791791;
+
+const int N = 1e6 + 5;
+
+int seg[4*N];
+int lazy[4*N];
+
+void do_lazy(int root, int ll, int rl) {
+	seg[root] += lazy[root];
+	if (ll != rl) {
+		lazy[2*root+1] += lazy[root];
+		lazy[2*root+2] += lazy[root];
+	}
+	lazy[root] = 0;
+}
+
+int update(int root, int ll, int rl, int l, int r, int val) {
+	do_lazy(root, ll, rl);
+	if (r < ll || l > rl) return seg[root];
+	if (ll >= l && rl <= r) {
+		lazy[root] += val;
+		do_lazy(root, ll, rl);
+		return seg[root];
+	}
+	int update_left = update(2*root+1, ll, (ll+rl)/2, l, r, val);
+	int update_right = update(2*root+2, (ll+rl)/2+1, rl, l, r, val);
+	return seg[root] = min(update_left, update_right);
+}
+
+int query(int root, int ll, int rl, int l, int r) {
+	do_lazy(root, ll, rl);
+	if (r < ll || l > rl) return inf;
+	if (ll >= l && rl <= r) return seg[root];
+	int query_left = query(2*root+1, ll, (ll+rl)/2, l, r);
+	int query_right = query(2*root+2, (ll+rl)/2+1, rl, l, r);
+	return min(query_left, query_right); 
+}
+\end{lstlisting}
+
+\end{document}
+

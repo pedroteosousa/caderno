@@ -14,7 +14,7 @@ void do_lazy(int root, int ll, int rl) {
 	lazy[root] = 0;
 }
 
-int update(int root, int ll, int rl, int l, int r, int val) { //update values in range (l, r)
+int update(int root, int ll, int rl, int l, int r, int val) {
 	do_lazy(root, ll, rl);
 	if (r < ll || l > rl) return seg[root];
 	if (ll >= l && rl <= r) {
@@ -22,12 +22,16 @@ int update(int root, int ll, int rl, int l, int r, int val) { //update values in
 		do_lazy(root, ll, rl);
 		return seg[root];
 	}
-	return seg[root] = min(update(2*root+1, ll, (ll+rl)/2, l, r, val), update(2*root+2, (ll+rl)/2+1, rl, l, r, val));
+	int update_left = update(2*root+1, ll, (ll+rl)/2, l, r, val);
+	int update_right = update(2*root+2, (ll+rl)/2+1, rl, l, r, val);
+	return seg[root] = min(update_left, update_right);
 }
 
-int query(int root, int ll, int rl, int l, int r) { //find minimum in range (l, r)
+int query(int root, int ll, int rl, int l, int r) {
 	do_lazy(root, ll, rl);
 	if (r < ll || l > rl) return inf;
 	if (ll >= l && rl <= r) return seg[root];
-	return min(query(2*root+1, ll, (ll+rl)/2, l, r), query(2*root+2, (ll+rl)/2+1, rl, l, r)); 
+	int query_left = query(2*root+1, ll, (ll+rl)/2, l, r);
+	int query_right = query(2*root+2, (ll+rl)/2+1, rl, l, r);
+	return min(query_left, query_right); 
 }

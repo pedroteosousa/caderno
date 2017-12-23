@@ -1,0 +1,11 @@
+#[Section Name]
+#code.cpp;Subsection Name
+
+[Geometry]
+point.cpp;Point Struct
+convex_hull.cpp;Convex Hull
+
+[Data Structures]
+bit.cpp;BIT
+seg_tree.cpp;Recursive Segment Tree
+seg_lazy.cpp;Lazy Segment Tree

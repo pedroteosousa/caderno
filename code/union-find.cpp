@@ -1,5 +1,3 @@
-const int N = 1e6 + 5;
-
 int p[N];
 int w[N];
 
@@ -18,9 +16,7 @@ int main() {
 	int n;
 	scanf("%d", &n);
 	for(int i=0;i<n;i++) {
-		p[i] = i;
-		w[i] = 1;
+		w[p[i] = i] = 1;
 	} 
 	return 0;
 }
-

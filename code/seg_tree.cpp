@@ -7,7 +7,8 @@ void build(int n) {
 }
 
 void modify(int pos, int val, int n) {
-	for(t[pos += n] = val; pos != 1; pos>>=1) t[pos>>1] = min(t[pos], t[pos^1]);
+	for(t[pos += n] = val; pos != 1; pos>>=1)
+		t[pos>>1] = min(t[pos], t[pos^1]);
 }
 
 int query(int l, int r, int n) { // [l, r)

@@ -1,5 +1,3 @@
-const int N = 1e6 + 5;
-
 int b[N];
 
 int update(int p, int val, int n) {

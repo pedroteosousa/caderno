@@ -1,5 +1,3 @@
-const int N = 1e6 + 5;
-
 int t[N<<1];
 
 void build(int n) {

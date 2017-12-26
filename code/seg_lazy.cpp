@@ -1,7 +1,3 @@
-const int inf = 1791791791;
-
-const int N = 1e6 + 5;
-
 int seg[4*N];
 int lazy[4*N];
 

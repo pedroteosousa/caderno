@@ -107,8 +107,6 @@ int getsum(int p) {
 \end{lstlisting}
 \subsection{Recursive Segment Tree}
 \begin{lstlisting}[language=C++]
-const int N = 1e6 + 5;
-
 int t[N<<1];
 
 void build(int n) {
@@ -131,10 +129,6 @@ int query(int l, int r, int n) { // [l, r)
 \end{lstlisting}
 \subsection{Lazy Segment Tree}
 \begin{lstlisting}[language=C++]
-const int inf = 1791791791;
-
-const int N = 1e6 + 5;
-
 int seg[4*N];
 int lazy[4*N];
 

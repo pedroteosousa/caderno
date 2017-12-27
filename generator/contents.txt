@@ -6,6 +6,7 @@ point.cpp;Point Struct
 convex_hull.cpp;Convex Hull
 
 [Data Structures]
+trie.cpp;Trie
 bit.cpp;BIT
 seg_tree.cpp;Recursive Segment Tree
 seg_lazy.cpp;Lazy Segment Tree

@@ -51,7 +51,6 @@ for line in template:
 			for subsection in section[1]:
 				latex += "\\subsection{" + subsection[1] + "}\n"
 				latex += "\\begin{lstlisting}[language="+getLanguage(subsection[0])+"]\n" + readFile(code_dir + subsection[0]) + "\\end{lstlisting}\n"
-				getLanguage(subsection[0])
 	else:
 		latex += line
 

@@ -57,7 +57,8 @@ int main() {
 		long long n;
 		scanf("%lld", &n);
 		matrix<2> m;
-		memcpy (m.mat, (const long long [][2]){{1, 1}, {1, 0}}, sizeof (m.mat));
+		long long temp[2][2] = {{1, 1}, {1, 0}};
+		memcpy (m.mat, temp, sizeof (m.mat));
 		m = m.pow(n+2, mod);
 		if (n == 0) m.mat[0][0] = 0;
 		if (n == 1) m.mat[0][0] = 2;

@@ -1,3 +1,4 @@
+#Structure:
 #[Section Name]
 #code.cpp;Subsection Name
 
@@ -7,12 +8,13 @@ convex_hull.cpp;Convex Hull
 
 [Data Structures]
 trie.cpp;Trie
-bit.cpp;BIT
-seg_tree.cpp;Iterative Segment Tree
-seg_lazy.cpp;Lazy Segment Tree
+bit.cpp;Binary Indexed Tree
+lazy_seg.cpp;Lazy Segment Tree
+union_find.cpp;Union Find
 
 [Mathematics]
 matrix.cpp;Matrix
+fft.cpp;Fast Fourier Transform
 ext_euclid.cpp;Extended Euclidean Algorithm
 
 [Miscellaneous]

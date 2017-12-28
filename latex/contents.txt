@@ -3,7 +3,7 @@
 #code.cpp;Subsection Name
 
 [Geometry]
-point.cpp;Point Struct
+point.cpp;Miscellaneous Geometry
 convex_hull.cpp;Convex Hull
 
 [Data Structures]

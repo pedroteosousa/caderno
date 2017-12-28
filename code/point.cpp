@@ -19,14 +19,18 @@ struct point {
     point operator* (type c) { return point(c*x, c*y); }
     point operator/ (type c) { return point(x/c, y/c); }
 
-    bool operator<(const point &p) { return x < p.x || x == p.x && y < p.y;}
+    bool operator<(const point &p) {
+		return x < p.x || x == p.x && y < p.y;
+	}
 };
 
 type dot(point p, point q)  { return p.x*q.x+p.y*q.y; }
 type dist(point p, point q)  { return sqrt(dot(p-q,p-q)); }
 type cross(point p, point q)  { return p.x*q.y-p.y*q.x; }
 
-point projectInLine(point c, point a, point b) { return a + (b-a)*dot(c-a, b-a)/dot(b-a, b-a); }
+point projectInLine(point c, point a, point b) {
+	return a + (b-a)*dot(c-a, b-a)/dot(b-a, b-a);
+}
 
 point projectInSegment(point c, point a, point b) {
     point lineP = projectInLine(c, a, b);

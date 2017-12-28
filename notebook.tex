@@ -1,7 +1,7 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 
-\title{Caderno}
+\title{Notebook}
 \author{pedroteosousa }
 \date{}
 
@@ -229,10 +229,8 @@ int query(int root, int ll, int rl, int l, int r) {
 \section{Mathematics}
 \subsection{Matrix}
 \begin{lstlisting}[language=C++]
-// This code solves problem MAIN74 on SPOJ
-
+// This solves problem MAIN74 on SPOJ
 #include <bits/stdc++.h>
-
 using namespace std;
 
 const int mod = 1e9+7;
@@ -299,6 +297,56 @@ int main() {
     return 0;
 }
 
+\end{lstlisting}
+\subsection{Extended Euclidean Algorithm}
+\begin{lstlisting}[language=C++]
+// This solves 10104 on UVa
+#include <bits/stdc++.h>
+using namespace std;
+
+long long ext(long long a, long long b, long long &x, long long &y) {
+	if (a == 0) {
+		x = 0;
+		y = 1;
+		return b;
+	}
+	long long x1, y1;
+	long long gcd = ext(b%a, a, x1, y1);
+
+	x = y1 - (b/a)*x1;
+	y = x1;
+
+	return gcd;
+}
+
+int main() {
+	long long a, b;
+	while (scanf("%lld %lld", &a, &b) != EOF) {
+		long long x, y;
+		long long gcd = ext(a, b, x, y);
+		if (a == b && x > y) swap(x, y);
+		printf("%lld %lld %lld\n", x, y, gcd);	
+	}
+    return 0;
+}
+
+\end{lstlisting}
+\section{Miscellaneous}
+\subsection{vim settings}
+\begin{lstlisting}[language=]
+set ai si noet ts=4 sw=4 sta sm nu rnu
+inoremap <NL> <ESC>o
+nnoremap <NL> o
+inoremap <C-up> <C-o>:m-2<CR>
+inoremap <C-down> <C-o>:m+1<CR>
+nnoremap <C-up> :m-2<CR>
+nnoremap <C-down> :m+1<CR>
+vnoremap <C-up> :m-2<CR>gv
+vnoremap <C-down> :m'>+1<CR>gv
+syntax on
+colors evening
+highlight Normal ctermbg=none "No background
+highlight nonText ctermbg=none
 \end{lstlisting}
 
 \end{document}

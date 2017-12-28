@@ -1,7 +1,5 @@
-// This code solves problem MAIN74 on SPOJ
-
+// This solves problem MAIN74 on SPOJ
 #include <bits/stdc++.h>
-
 using namespace std;
 
 const int mod = 1e9+7;

@@ -1,7 +1,10 @@
-caderno: * code/*
-	python generator/generate.py > caderno.tex
-	pdflatex caderno.tex
-	pdflatex caderno.tex
+pdf: *
+	make tex
+	pdflatex notebook.tex
+	pdflatex notebook.tex
+
+tex: *
+	python latex/latex.py > notebook.tex
 
 clean:
-	rm caderno.aux caderno.log caderno.toc
+	rm notebook.aux notebook.log notebook.toc

@@ -1,6 +1,6 @@
 code_dir = "code/"
-template_file = "generator/template.tex"
-contents_file = "generator/contents.txt"
+template_file = "latex/template.tex"
+contents_file = "latex/contents.txt"
 
 # return file string
 def readFile(filename):
@@ -32,6 +32,13 @@ def getSections():
 def finishLatex(contents):
 	return contests
 
+def getLanguage(filename):
+	extension = filename.split('.')[-1]
+	if extension == "cpp":
+		return "C++"
+	else:
+		return ""
+
 sections = getSections()
 
 latex = ""
@@ -43,7 +50,8 @@ for line in template:
 			latex += "\\section{" + section[0] + "}\n"
 			for subsection in section[1]:
 				latex += "\\subsection{" + subsection[1] + "}\n"
-				latex += "\\begin{lstlisting}[language=C++]\n" + readFile(code_dir + subsection[0]) + "\\end{lstlisting}\n"
+				latex += "\\begin{lstlisting}[language="+getLanguage(subsection[0])+"]\n" + readFile(code_dir + subsection[0]) + "\\end{lstlisting}\n"
+				getLanguage(subsection[0])
 	else:
 		latex += line
 

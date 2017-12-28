@@ -13,3 +13,7 @@ seg_lazy.cpp;Lazy Segment Tree
 
 [Mathematics]
 matrix.cpp;Matrix
+ext_euclid.cpp;Extended Euclidean Algorithm
+
+[Miscellaneous]
+.vimrc;vim settings

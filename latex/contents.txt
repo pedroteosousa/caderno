@@ -16,6 +16,7 @@ union_find.cpp;Union Find
 matrix.cpp;Matrix
 fft.cpp;Fast Fourier Transform
 ext_euclid.cpp;Extended Euclidean Algorithm
+rabin_miller.cpp;Rabin-Miller Primality Test
 
 [Miscellaneous]
 .vimrc;vim settings

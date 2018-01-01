@@ -6,6 +6,9 @@
 point.cpp;Miscellaneous Geometry
 convex_hull.cpp;Convex Hull
 
+[Graph Algorithms]
+tarjan.cpp;Tarjan
+
 [Data Structures]
 trie.cpp;Trie
 bit.cpp;Binary Indexed Tree

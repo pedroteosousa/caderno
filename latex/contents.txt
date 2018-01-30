@@ -3,8 +3,7 @@
 #code.cpp;Subsection Name
 
 [Geometry]
-point1.cpp;Miscellaneous Geometry
-convex_hull.cpp;Convex Hull
+point.cpp;Miscellaneous Geometry
 
 [Graph Algorithms]
 tarjan.cpp;Tarjan

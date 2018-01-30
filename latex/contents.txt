@@ -3,7 +3,7 @@
 #code.cpp;Subsection Name
 
 [Geometry]
-point.cpp;Miscellaneous Geometry
+point1.cpp;Miscellaneous Geometry
 convex_hull.cpp;Convex Hull
 
 [Graph Algorithms]

@@ -9,8 +9,8 @@ struct point {
 
 	point operator+ (const point &p) { return {x+p.x, y+p.y}; }
 	point operator- (const point &p) { return {x-p.x, y-p.y}; }
-	point operator* (double c) { return point(c*x, c*y); }
-	point operator/ (double c) { return point(x/c, y/c); }
+	point operator* (double c) { return {c*x, c*y}; }
+	point operator/ (double c) { return {x/c, y/c}; }
 
 	double operator^ (const point &p) { return x*p.y - y*p.x; }
 	double operator* (const point &p) { return x*p.x + y*p.y; }
@@ -19,7 +19,7 @@ struct point {
 		return {x*c - y*s, x*s + y*c}; 
 	}
 	point rotate (double ang) {
-		return {x*cos(ang) - y*sin(ang), x*sin(ang) + y*cos(ang)};
+		return rotate(cos(ang), sin(ang));
 	}
 
 	double len() { return hypot(x, y); }
@@ -42,12 +42,14 @@ vector<point> convex_hull(vector<point> p) {
 
 	for(int i=0; i<n; i++) {
 		// use <= when including collinear points
-		while(k>=2 && (side(hull[k-2], hull[k-1], p[i]) < 0)) k--;
+		while(k>=2 && (side(hull[k-2], hull[k-1], p[i]) < 0))
+			k--;
 		hull[k++] = p[i];
 	}
 
 	for(int i=n-2,t=k+1; i>=0; i--) {
-		while(k>=t && (side(hull[k-2], hull[k-1], p[i]) < 0)) k--;
+		while(k>=t && (side(hull[k-2], hull[k-1], p[i]) < 0))
+			k--;
 		hull[k++] = p[i];
 	}
 

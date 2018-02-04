@@ -1,7 +1,3 @@
-// This (probably) solves PON on SPOJ
-#include <bits/stdc++.h>
-using namespace std;
-
 long long llrand(long long mn, long long mx) {
 	long long p = rand();
 	p <<= 32ll;
@@ -53,14 +49,3 @@ bool isProbablyPrime(long long p, long long t=64) {
 	}
 	return true;
 }
-
-int main() {
-	int t; scanf("%d", &t);
-	while (t--) {
-		long long p; scanf("%lld", &p);
-		if (isProbablyPrime(p)) printf("YES\n");
-		else printf("NO\n");
-	}
-    return 0;
-}
-

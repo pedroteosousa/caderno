@@ -23,5 +23,8 @@ fft.cpp;Fast Fourier Transform
 ext_euclid.cpp;Extended Euclidean Algorithm
 rabin_miller.cpp;Rabin-Miller Primality Test
 
+[Strings]
+zfunction.cpp;Z function
+
 [Miscellaneous]
 .vimrc;vim settings

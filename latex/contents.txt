@@ -8,6 +8,9 @@ point.cpp;Miscellaneous Geometry
 [Graph Algorithms]
 tarjan.cpp;Tarjan
 
+[Flow]
+dinitz.cpp;Dinitz' Algorithm
+
 [Data Structures]
 trie.cpp;Trie
 bit.cpp;Binary Indexed Tree

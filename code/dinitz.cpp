@@ -16,43 +16,41 @@ struct dinitz {
 	vector<int> adj[N];
 	
 	void addEdge(int i, int j, ll c) {
-		edges.pb({i, j, c, 0ll});
-		adj[i].pb(edges.size() - 1);
-		edges.pb({j, i, 0ll, 0ll});
-		adj[j].pb(edges.size() - 1);
+		edges.pb({i, j, c, 0}); adj[i].pb(edges.size() - 1);
+		edges.pb({j, i, 0, 0}); adj[j].pb(edges.size() - 1);
 	}
 
-	int tbfs, seen[N], dist[N];
+	int turn, seen[N], dist[N];
 	bool bfs (int s, int t) {
-		tbfs++;
+		turn++;
 		queue<int> q; q.push(t);
 		dist[t] = 0; 
 		while (q.size()) {
 			int u = q.front(); q.pop();
-			seen[u] = tbfs;
-			for (auto a : adj[u]) {
-				int v = edges[a].to;
-				if (seen[v] == tbfs || edges[a^1].c == edges[a^1].f)
+			seen[u] = turn;
+			for (auto e : adj[u]) {
+				int v = edges[e].to;
+				if (seen[v] == turn || edges[e^1].c == edges[e^1].f)
 					continue;
-				seen[v] = tbfs;
+				seen[v] = turn;
 				dist[v] = dist[u] + 1;
 				q.push(v);
 			}
 		}
-		return seen[s] == tbfs;
+		return seen[s] == turn;
 	}
 
 	ll dfs(int u, ll f, int s, int t) {
 		if (u == t || f == 0)
 			return f;
-		for (auto a : adj[u]) {
-			int v = edges[a].to;
-			if (seen[v] != tbfs || dist[v] + 1 != dist[u] || edges[a].c == edges[a].f)
+		for (auto e : adj[u]) {
+			int v = edges[e].to;
+			if (seen[v] != turn || dist[v] + 1 != dist[u] || edges[e].c == edges[e].f)
 				continue;
-			ll nf = dfs(v, min(f, edges[a].c - edges[a].f), s, t);
+			ll nf = dfs(v, min(f, edges[e].c - edges[e].f), s, t);
 			if (nf) {
-				edges[a].f += nf;
-				edges[a^1].f -= nf;
+				edges[e].f += nf;
+				edges[e^1].f -= nf;
 				return nf;
 			}
 		}

@@ -30,7 +30,7 @@ struct point {
 };
 
 double side(point a, point b, point c) {
-	return a^b + b^c + c^a;
+	return (a^b) + (b^c) + (c^a);
 }
 
 vector<point> convex_hull(vector<point> p) {

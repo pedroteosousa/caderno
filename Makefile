@@ -7,4 +7,4 @@ tex: *
 	python latex/latex.py > notebook.tex
 
 clean:
-	rm notebook.aux notebook.log notebook.toc
+	rm notebook.aux notebook.log notebook.toc notebook.out

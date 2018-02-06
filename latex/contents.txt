@@ -10,6 +10,7 @@ tarjan.cpp;Tarjan
 
 [Flow]
 dinitz.cpp;Dinitz' Algorithm
+min_cost.cpp;Min Cost
 
 [Data Structures]
 trie.cpp;Trie
@@ -25,6 +26,7 @@ rabin_miller.cpp;Rabin-Miller Primality Test
 
 [Strings]
 zfunction.cpp;Z function
+kmp.cpp;Knuth–Morris–Pratt Algorithm
 
 [Miscellaneous]
 .vimrc;vim settings

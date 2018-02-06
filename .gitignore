@@ -5,3 +5,5 @@
 notebook.*
 !notebook.pdf
 !notebook.tex
+
+!Makefile

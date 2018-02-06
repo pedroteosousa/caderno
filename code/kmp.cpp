@@ -1,16 +1,16 @@
 int kmp[N];
 
-void build(const char *s) {
-	int n = strlen(s), k = -1;
+void build(string p) {
+	int n = p.size(), k = -1;
 	kmp[0] = k;
 	for (int i = 1; i < n+1; i++) {
-		while (k >= 0 && s[k] != s[i-1]) k = kmp[k];
+		while (k >= 0 && p[k] != p[i-1]) k = kmp[k];
 		kmp[i] = ++k;
 	}
 }
 
-vector<int> match(const char *p, const char *s) {
-	int n = strlen(s), m = strlen(p), j = 0;
+vector<int> match(string p, string s) {
+	int n = s.size(), m = p.size(), j = 0;
 	vector<int> matches;
 	for (int i = 1; i < n+1; i++) {
 		while (j >= 0 && p[j] != s[i-1]) j = kmp[j];

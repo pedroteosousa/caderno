@@ -20,7 +20,7 @@ TEST(Simple, Random) {
 		string s;
 		while ((int)s.size() < n) {
 			s.push_back('a' + (rand()%alf));
-			brutao(s);
 		}
+		brutao(s);
 	}
 }

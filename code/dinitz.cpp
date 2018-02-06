@@ -13,20 +13,19 @@ struct dinitz {
 
 	int turn, seen[N], dist[N], st[N];
 	bool bfs (int s, int t) {
-		turn++;
-		queue<int> q; q.push(t);
+		seen[t] = ++turn;
 		dist[t] = 0; 
+		queue<int> q({t});
 		while (q.size()) {
 			int u = q.front(); q.pop();
-			seen[u] = turn;
 			st[u] = 0;
 			for (auto e : adj[u]) {
 				int v = edges[e].to;
-				if (seen[v] == turn || edges[e^1].c == edges[e^1].f)
-					continue;
-				seen[v] = turn;
-				dist[v] = dist[u] + 1;
-				q.push(v);
+				if (seen[v] != turn && edges[e^1].c != edges[e^1].f) {
+					seen[v] = turn;
+					dist[v] = dist[u] + 1;
+					q.push(v);
+				}
 			}
 		}
 		return seen[s] == turn;
@@ -50,13 +49,9 @@ struct dinitz {
 
 	ll max_flow(int s, int t) {
 		ll resp = 0ll;
-		while (bfs(s, t)) {
-			ll val = 0;
-			do {
+		while (bfs(s, t))
+			while (ll val = dfs(s, t, inf))
 				resp += val;
-				val = dfs(s, t, inf);
-			} while (val);
-		}
 		return resp;
 	}
 };

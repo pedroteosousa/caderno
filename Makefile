@@ -1,10 +1,14 @@
-pdf: *
+all: *
 	make tex
-	pdflatex notebook.tex
-	pdflatex notebook.tex
+	make pdf
+	$(MAKE) -C tests
+	make clean
 
-tex: *
+pdf: notebook.tex
+	latexmk --pdf notebook.tex
+
+tex: code/* latex/*
 	python latex/latex.py > notebook.tex
 
 clean:
-	rm notebook.aux notebook.log notebook.toc notebook.out
+	rm *.aux *.log *.toc *.out *.fls *.fdb_latexmk

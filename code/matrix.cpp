@@ -1,9 +1,3 @@
-// This solves problem MAIN74 on SPOJ
-#include <bits/stdc++.h>
-using namespace std;
-
-const int mod = 1e9+7;
-
 template <int n> struct matrix {
 	long long mat[n][n];
 	matrix () {
@@ -17,12 +11,14 @@ template <int n> struct matrix {
 		for (int i=0;i<n;i++)
 			mat[i][i] = 1;
 	}
-	matrix<n> operator* (const matrix<n> &a) const {
+	matrix<n> mul (const matrix<n> &a, long long m) const {
 		matrix<n> temp;
 		for (int i=0; i<n; i++)
 			for (int j=0; j<n; j++)
-				for (int k=0; k<n; k++)
-					temp.mat[i][j] += mat[i][k]*a.mat[k][j];
+				for (int k=0; k<n; k++) {
+					temp.mat[i][j] += (mat[i][k]*a.mat[k][j])%m;
+					temp.mat[i][j] %= m;
+				}
 		return temp;
 	}
 	matrix<n> operator% (long long m) {
@@ -44,26 +40,8 @@ template <int n> struct matrix {
 		}
 		temp = pow(e/2, m);
 		if (e % 2 == 0)
-			return (temp*temp)%m;
+			return (temp.mul(temp, m))%m;
 		else
-			return (((temp*temp)%m)*pow(1, m))%m;
+			return (((temp.mul(temp, m))%m)*pow(1, m))%m;
 	}
 };
-
-int main() {
-	int t;
-	scanf("%d", &t);
-	while (t--) {
-		long long n;
-		scanf("%lld", &n);
-		matrix<2> m;
-		long long temp[2][2] = {{1, 1}, {1, 0}};
-		memcpy (m.mat, temp, sizeof (m.mat));
-		m = m.pow(n+2, mod);
-		if (n == 0) m.mat[0][0] = 0;
-		if (n == 1) m.mat[0][0] = 2;
-		printf("%lld\n", m.mat[0][0]);
-	}
-    return 0;
-}
-

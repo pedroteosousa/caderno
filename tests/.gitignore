@@ -1,4 +1,5 @@
 trie.tests
 kmp.tests
 zfunction.tests
+matrix.tests
 rabin_miller.tests

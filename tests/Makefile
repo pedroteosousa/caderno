@@ -1,3 +1,7 @@
+test: *
+	make all
+	make clean
+
 # Copied from victorsenam/caderno/test/Makefile that in turn was
 # Copied and adapted from gtest/googletest/make/Makefile
 # Edit only the targets in the end, adding targets to the .o's

@@ -1,7 +1,7 @@
 int z[N];
 
-void Z(const char *s) {
-	int n = strlen(s);
+void Z(string s) {
+	int n = s.size();
 	int m = -1;
 	for (int i = 1; i < n; i++) {
 		z[i] = 0;

@@ -60,7 +60,7 @@ struct point {
 };
 
 double side(point a, point b, point c) {
-	return a^b + b^c + c^a;
+	return (a^b) + (b^c) + (c^a);
 }
 
 vector<point> convex_hull(vector<point> p) {
@@ -265,9 +265,7 @@ struct min_cost {
 \section{Data Structures}
 \subsection{Trie}
 \begin{lstlisting}[language=C++]
-const int A = 26;
-
-typedef struct trie {
+struct trie {
 	struct node {
 		int to[A], freq, end;
 	};
@@ -279,6 +277,7 @@ typedef struct trie {
 	void init() {
 		memset(t, 0, sizeof(struct node));
 	}
+	
 	// insert string
 	void insert(char *s, int p = 0) {
 		t[p].freq++;
@@ -324,7 +323,7 @@ typedef struct trie {
 			return -1;
 		return --t[p].freq;
 	}
-} trie;
+};
 \end{lstlisting}
 \subsection{Binary Indexed Tree}
 \begin{lstlisting}[language=C++]
@@ -670,8 +669,8 @@ bool isProbablyPrime(long long p, long long t=64) {
 \begin{lstlisting}[language=C++]
 int z[N];
 
-void Z(const char *s) {
-	int n = strlen(s);
+void Z(string s) {
+	int n = s.size();
 	int m = -1;
 	for (int i = 1; i < n; i++) {
 		z[i] = 0;
@@ -688,20 +687,20 @@ void Z(const char *s) {
 \begin{lstlisting}[language=C++]
 int kmp[N];
 
-void build(const char *s) {
-	int n = strlen(s), k = -1;
+void build(string p) {
+	int n = p.size(), k = -1;
 	kmp[0] = k;
 	for (int i = 1; i < n+1; i++) {
-		while (k >= 0 && s[k] != s[i-1]) k = kmp[k];
+		while (k >= 0 && p[k] != p[i-1]) k = kmp[k];
 		kmp[i] = ++k;
 	}
 }
 
-vector<int> match(const char *p, const char *s) {
-	int n = strlen(s), m = strlen(p), j = 0;
+vector<int> match(string p, string s) {
+	int n = s.size(), m = p.size(), j = 0;
 	vector<int> matches;
 	for (int i = 1; i < n+1; i++) {
-		while (j >= 0 && p[j] != s[i]) j = kmp[j];
+		while (j >= 0 && p[j] != s[i-1]) j = kmp[j];
 		if (++j == m) {
 			matches.push_back(i-j+1);
 			j = kmp[j];

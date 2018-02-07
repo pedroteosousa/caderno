@@ -6,7 +6,7 @@ const int N = 1e5;
 #include "../code/zfunction.cpp"
 
 void brutao(string s) {
-	Z(s.c_str());
+	Z(s);
 	for (int i = 1; i < (int)s.size(); i++) {
 		int match = 0;
 		while (i + match < (int)s.size() && s[i + match] == s[match]) match++;

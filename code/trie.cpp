@@ -1,6 +1,4 @@
-const int A = 26;
-
-typedef struct trie {
+struct trie {
 	struct node {
 		int to[A], freq, end;
 	};
@@ -12,6 +10,7 @@ typedef struct trie {
 	void init() {
 		memset(t, 0, sizeof(struct node));
 	}
+	
 	// insert string
 	void insert(char *s, int p = 0) {
 		t[p].freq++;
@@ -57,4 +56,4 @@ typedef struct trie {
 			return -1;
 		return --t[p].freq;
 	}
-} trie;
+};

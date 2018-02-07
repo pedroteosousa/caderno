@@ -1,5 +1,6 @@
 # Notebook
 [![Build Status](https://travis-ci.org/pedroteosousa/caderno.svg?branch=master)](https://travis-ci.org/google/googletest) 
+
 Useful algorithms for competitive programming competitions
 
 ### Usage

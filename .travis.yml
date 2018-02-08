@@ -1,7 +1,4 @@
 before_install: 
     - "sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-full"
-deploy: 
-    github_token: $GITHUB_TOKEN
-    skip_cleanup: true
 script: 
     - make

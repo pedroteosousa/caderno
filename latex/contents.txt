@@ -7,6 +7,7 @@ point.cpp;Miscellaneous Geometry
 
 [Graph Algorithms]
 tarjan.cpp;Tarjan
+lca.cpp;Lowest Common Ancestor
 
 [Flow]
 dinitz.cpp;Dinitz' Algorithm

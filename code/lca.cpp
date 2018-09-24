@@ -1,36 +1,38 @@
+const int N = 1e6 + 5;
+const int L = 20;
+
 vector<int> adj[N];
-int h[N], f[N], seen[N], seg[N << 2], tme = 0;
+int prof[N], p[N][L+5];
 
-int cmp(int u, int v) {
-	if (u != -1 && (v == -1 || h[u] < h[v])) return u;
-	else return v;
+void dfs(int v, int h = 1) {
+	prof[v] = h;
+	if (h == 1) p[v][0] = v;
+	for (auto u : adj[v])
+		if (prof[u] == 0) {
+			p[u][0] = v;
+			dfs(u, h+1);
+		}
 }
 
-void build() {
-	for(int i = 2*N-1; i > 0; i--) seg[i] = cmp(seg[i<<1], seg[i<<1|1]);
-}
-
-int query(int l, int r) {
-	int resp = -1;
-	for(l += 2*N, r += 2*N; l < r; l >>= 1, r >>= 1) {
-		if (l&1) resp = cmp(resp, seg[l++]);
-		if (r&1) resp = cmp(resp, seg[--r]);
-	}
-	return resp;
+void init(int n) {
+	for (int i = 1; i <= L; i++)
+		for (int j = 1; j < n; j++)
+			p[j][i] = p[p[j][i-1]][i-1];
 }
 
 int lca(int u, int v) {
-	return query(min(f[u], f[v]), max(f[u], f[v])+1);
-}
-
-void dfs(int u, int p = 0) {
-	seen[u] = 1; f[u] = tme; h[u] = p;
-	seg[2*N + (tme++)] = u;
-	for (auto v : adj[u]) {
-		if (!seen[v]) {
-			dfs(v, p+1);
-			seg[2*N + (tme++)] = u;
+	if (prof[u] < prof[v]) swap(u, v);
+	for (int i = L; i >= 0; i--)
+		if (prof[p[u][i]] >= prof[v])
+			u = p[u][i];
+	for (int i = L; i >= 0; i--)
+		if (p[u][i] != p[v][i]) {
+			u = p[u][i];
+			v = p[v][i];
 		}
+	while (u != v) {
+		u = p[u][0];
+		v = p[v][0];
 	}
-	if (p == 0) build();
+	return u;
 }

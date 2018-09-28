@@ -10,7 +10,7 @@ tarjan.cpp;Tarjan
 lca.cpp;Lowest Common Ancestor
 
 [Flow]
-dinitz.cpp;Dinitz' Algorithm
+dinic.cpp;Dinic's Algorithm
 min_cost.cpp;Min Cost
 
 [Data Structures]

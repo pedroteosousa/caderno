@@ -1,4 +1,4 @@
-struct dinitz {
+struct dinic {
 	struct edge {
 		int from, to;
 		ll c, f;

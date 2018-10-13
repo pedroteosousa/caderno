@@ -1,7 +1,7 @@
 \documentclass{article}
 
 \title{ICPC Notebook}
-\author{pedroteosousa }
+\author{pedroteosousa}
 \date{}
 
 \usepackage[utf8]{inputenc}
@@ -91,13 +91,9 @@ vector<point> convex_hull(vector<point> p) {
 \section{Graph Algorithms}
 \subsection{Tarjan}
 \begin{lstlisting}[language=C++]
-#include <bits/stdc++.h>
-using namespace std;
-
-const int N = 2e5 + 5;
 const int inf = 1791791791;
 
-vector<int> conn[N];
+vector<int> adj[N];
 
 // time complexity: O(V+E)
 stack<int> ts;
@@ -106,7 +102,7 @@ int comp[N]; // nodes in the same scc have the same color
 int scc_dfs(int n) {
 	seen[n] = low[n] = ++tme;
 	ts.push(n);
-	for (auto a : conn[n]) {
+	for (auto a : adj[n]) {
 		if (seen[a] == 0)
 			scc_dfs(a);
 		low[n] = min(low[n], low[a]);
@@ -121,27 +117,7 @@ int scc_dfs(int n) {
 		ncomp++;
 	}
 	return low[n];
-}
-
-int main() {
-	int n, m; scanf("%d %d", &n, &m);
-	while (m--) {
-		int a, b; scanf("%d %d", &a, &b);	
-		conn[a].push_back(b);
-	}
-	map<int, vector<int> > comps;
-	for (int i=0;i<n;i++) {
-		if (!seen[i]) scc_dfs(i);
-		comps[comp[i]].push_back(i);
-	}
-	for (auto a : comps) {
-		printf("%d: ", a.first);
-		for (auto v : a.second)
-			printf("%d ", v);
-		printf("\n");
-	}
-}
-\end{lstlisting}
+}\end{lstlisting}
 \subsection{Lowest Common Ancestor}
 \begin{lstlisting}[language=C++]
 const int N = 1e6 + 5;
@@ -435,11 +411,12 @@ struct seg_tree {
 \end{lstlisting}
 \subsection{Union Find}
 \begin{lstlisting}[language=C++]
-#include <bits/stdc++.h>
-using namespace std;
-
-const int N = 5e5 + 5;
 int p[N], w[N];
+
+void init() {
+	for (int i = 0; i < N; i++)
+		w[p[i] = i] = 1;
+}
 
 int find(int x) {
 	return p[x] = (x == p[x] ? x : find(p[x]));
@@ -450,16 +427,7 @@ void join(int a, int b) {
 	if (w[a] < w[b]) swap(a, b);
 	w[a] += w[b];
 	p[b] = a;
-}
-
-int main() {
-	int n;
-	scanf("%d", &n);
-	for(int i=0;i<n;i++)
-		w[p[i] = i] = 1;
-	return 0;
-}
-\end{lstlisting}
+}\end{lstlisting}
 \section{Mathematics}
 \subsection{Matrix}
 \begin{lstlisting}[language=C++]
@@ -538,12 +506,7 @@ void FFT(vector<cpx> &v, vector<cpx> &ans, int n, int type, int p[]) { // p[n]
 }\end{lstlisting}
 \subsection{Extended Euclidean Algorithm}
 \begin{lstlisting}[language=C++]
-// This solves 10104 on UVa
-#include <bits/stdc++.h>
-using namespace std;
-
-typedef long long ll;
-
+// x * a + y * b = gcd(a, b)
 ll ext(ll a, ll b, ll &x, ll &y) {
 	if (a == 0) {
 		x = 0;
@@ -557,20 +520,7 @@ ll ext(ll a, ll b, ll &x, ll &y) {
 	y = x1;
 
 	return gcd;
-}
-
-int main() {
-	ll a, b;
-	while (scanf("%lld %lld", &a, &b) != EOF) {
-		ll x, y;
-		ll gcd = ext(a, b, x, y);
-		if (a == b && x > y) swap(x, y);
-		printf("%lld %lld %lld\n", x, y, gcd);	
-	}
-    return 0;
-}
-
-\end{lstlisting}
+}\end{lstlisting}
 \subsection{Rabin-Miller Primality Test}
 \begin{lstlisting}[language=C++]
 long long llrand(long long mn, long long mx) {

@@ -1,9 +1,4 @@
-// This solves 10104 on UVa
-#include <bits/stdc++.h>
-using namespace std;
-
-typedef long long ll;
-
+// x * a + y * b = gcd(a, b)
 ll ext(ll a, ll b, ll &x, ll &y) {
 	if (a == 0) {
 		x = 0;
@@ -18,15 +13,3 @@ ll ext(ll a, ll b, ll &x, ll &y) {
 
 	return gcd;
 }
-
-int main() {
-	ll a, b;
-	while (scanf("%lld %lld", &a, &b) != EOF) {
-		ll x, y;
-		ll gcd = ext(a, b, x, y);
-		if (a == b && x > y) swap(x, y);
-		printf("%lld %lld %lld\n", x, y, gcd);	
-	}
-    return 0;
-}
-

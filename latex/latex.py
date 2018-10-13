@@ -1,17 +1,13 @@
-code_dir = "code/"
-template_file = "latex/template.tex"
-contents_file = "latex/contents.txt"
+info = {"code": "code/", "template": "latex/template.tex", "contents": "latex/contents.txt", "insert": "#add here"}
+languages = {"cpp": "C++"}
 
 # return file string
 def readFile(filename):
-	f = open(filename, "r")
-	contests =  f.read()
-	f.close()
-	return contests
+	with open(filename) as f:
+		return f.read()
 
 def getSections():
-	global contents_file
-	index = open(contents_file, "r")
+	index = open(info['contents'], "r")
 	sections = []
 
 	cur_section = []
@@ -29,30 +25,28 @@ def getSections():
 		sections.append(cur_section)
 	return sections
 
-def finishLatex(contents):
-	return contests
-
 def getLanguage(filename):
 	extension = filename.split('.')[-1]
-	if extension == "cpp":
-		return "C++"
-	else:
-		return ""
+	if extension in languages:
+		return languages[extension]
+	return ""
 
-sections = getSections()
+def getTex():
+	sections = getSections()
 
-latex = ""
-template = open(template_file, "r")
+	template = open(info['template'], "r")
+	template = readFile(info['template']).split(info['insert'])
 
-for line in template:
-	if line[0:-1] == "#add here":
-		for section in sections:
-			latex += "\\section{" + section[0] + "}\n"
-			for subsection in section[1]:
-				latex += "\\subsection{" + subsection[1] + "}\n"
-				latex += "\\begin{lstlisting}[language="+getLanguage(subsection[0])+"]\n" + readFile(code_dir + subsection[0]) + "\\end{lstlisting}\n"
-	else:
-		latex += line
+	latex = ""
 
-print(latex)
-template.close()
+	for section in sections:
+		latex += "\\section{" + section[0] + "}\n"
+		for subsection in section[1]:
+			latex += "\\subsection{" + subsection[1] + "}\n"
+			latex += "\\begin{lstlisting}[language="+getLanguage(subsection[0])+"]\n" + readFile(info['code'] + subsection[0]) + "\\end{lstlisting}\n"
+
+	latex = template[0] + latex + template[1]
+	
+	print(latex)
+
+getTex()

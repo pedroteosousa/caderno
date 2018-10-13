@@ -7,3 +7,5 @@ notebook.*
 !notebook.tex
 
 !Makefile
+
+.vscode

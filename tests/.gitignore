@@ -2,4 +2,5 @@ trie.tests
 kmp.tests
 zfunction.tests
 matrix.tests
+centroid.tests
 rabin_miller.tests

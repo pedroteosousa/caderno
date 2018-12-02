@@ -6,7 +6,7 @@ struct dinic {
 	vector<edge> edges;
 	vector<int> adj[N];
 
-	void addEdge(int i, int j, ll c) {
+	void add_edge(int i, int j, ll c) {
 		edges.push_back({i, j, c, 0}); adj[i].push_back(edges.size() - 1);
 		edges.push_back({j, i, 0, 0}); adj[j].push_back(edges.size() - 1);
 	}

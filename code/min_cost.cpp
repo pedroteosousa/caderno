@@ -9,7 +9,7 @@ struct min_cost {
 	vector<edge> edges;
 	vector<int> adj[N];
 	
-	void addEdge(int i, int j, ll cp, ll cs) {
+	void add_edge(int i, int j, ll cp, ll cs) {
 		edges.push_back({i, j, cp, 0, cs}); adj[i].push_back(edges.size() - 1);
 		edges.push_back({j, i, 0, 0, -cs}); adj[j].push_back(edges.size() - 1);
 	}
